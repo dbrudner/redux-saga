@@ -1,8 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import fetchPosts from "./fetch-posts";
+import { fetchPosts, loadMore } from "./root-saga";
 import { List, Button, Spin } from "antd";
-import { getVisiblePosts, MORE_LOADED } from "./store";
+import { getVisiblePosts } from "./store";
 
 class Posts extends React.Component<any, any> {
   constructor(props) {
@@ -33,7 +33,7 @@ class Posts extends React.Component<any, any> {
           );
         })}
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Button onClick={() => this.props.loadMore()}>Load more </Button>
+          <Button onClick={this.props.loadMore}>Load more </Button>
         </div>
       </List>
     );
@@ -42,7 +42,7 @@ class Posts extends React.Component<any, any> {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPosts: () => dispatch(fetchPosts()),
+    fetchPosts: () => fetchPosts(),
     loadMore: () => dispatch({ type: "MORE_LOADED" })
   };
 };

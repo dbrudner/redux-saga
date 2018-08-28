@@ -21,6 +21,7 @@ export const reducer = (
   state = initialState,
   action: { type: string; payload: any }
 ) => {
+  console.log(action);
   if (action.type === IS_LOADING) {
     return { ...state, loading: true };
   }

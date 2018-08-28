@@ -2,16 +2,19 @@ import * as React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import { reducer } from "./store";
-import Posts from "./posts.tsx";
+import createSagaMiddleware from "redux-saga";
+import Posts from "./posts";
 import "antd/dist/antd.css";
+import rootSaga from "./root-saga";
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const sagaMiddleware = createSagaMiddleware();
 
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 const App = () => (
   <div>
-    <Provider store={createStoreWithMiddleware(reducer)}>
+    <Provider store={store}>
       <div style={{ margin: "20px 100px" }}>
         <Posts />
       </div>
