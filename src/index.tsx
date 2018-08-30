@@ -7,6 +7,8 @@ import createSagaMiddleware from "redux-saga";
 import Posts from "./posts";
 import "antd/dist/antd.css";
 import rootSaga from "./root-saga";
+import Search from "./search";
+import ShowMore from "./show-more";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -16,7 +18,9 @@ const App = () => (
   <div>
     <Provider store={store}>
       <div style={{ margin: "20px 100px" }}>
-        <Posts />
+        <h1>Posts</h1>
+        <Search />
+        <ShowMore />
       </div>
     </Provider>
   </div>
